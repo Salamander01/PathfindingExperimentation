@@ -2,8 +2,6 @@ package Windows;
 
 import Graph.Location;
 
-import java.awt.*;
-
 class Ball {
     private float radius;
     private float diameter;

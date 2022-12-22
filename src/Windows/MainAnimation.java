@@ -4,11 +4,15 @@ import Graph.Location;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 
 public class MainAnimation extends JPanel {
+
+    public static final int CLOSE_LINE_TOLERANCE = 150;
+
     private ArrayList<Ball> balls;
 
     private int width, height;
@@ -16,10 +20,9 @@ public class MainAnimation extends JPanel {
     public MainAnimation() {
         this.balls = new ArrayList<>();
 
-//        setBackground(Color.BLACK);
-
         JFrame.setDefaultLookAndFeelDecorated(true);
         JFrame frame = new JFrame("Main Animation");
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setSize(1200, 600);
@@ -59,7 +62,7 @@ public class MainAnimation extends JPanel {
     private void findNearBalls(LineManager lineManager, List<Ball> list, Mode mode) {
         for (int i = 0; i < list.size() - 2; i++) {
             int j = i + 1;
-            while ((getCoordOf(list.get(j), mode) - getCoordOf(list.get(i), mode)) < 150) {
+            while ((getCoordOf(list.get(j), mode) - getCoordOf(list.get(i), mode)) < CLOSE_LINE_TOLERANCE) {
                 lineManager.suggestLine(new Line(list.get(i).getLoc(), list.get(j).getLoc()));
                 j++;
                 if (j > list.size() - 1) break;

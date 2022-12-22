@@ -4,9 +4,11 @@ import java.util.Random;
 
 public class Main {
 
+    public static final int NUM_OF_BALLS = 40;
+
     public static void main(String[] args) {
         MainAnimation animation = new MainAnimation();
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < NUM_OF_BALLS; i++) {
             animation.addBall(5,  randInt(0, 1200), randInt(0, 600), (-2 * randInt(0, 2) + 1) * 2, (-2 * randInt(0, 2) + 1) * 2);
         }
         while (true) {
