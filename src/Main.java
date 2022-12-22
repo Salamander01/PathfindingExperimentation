@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         MainAnimation animation = new MainAnimation();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 40; i++) {
             animation.addBall(5,  randInt(0, 1200), randInt(0, 600), (-2 * randInt(0, 2) + 1) * 2, (-2 * randInt(0, 2) + 1) * 2);
         }
         while (true) {

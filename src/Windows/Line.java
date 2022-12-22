@@ -12,4 +12,8 @@ public record Line(Location loc1, Location loc2) {
         if (!(obj instanceof Line line)) return false;
         return (loc1 == line.loc1 && loc2 == line.loc2) || (loc1 == line.loc2 && loc2 == line.loc1);
     }
+
+    public Line opposite() {
+        return new Line(this.loc2, this.loc1);
+    }
 }

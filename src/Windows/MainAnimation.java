@@ -59,7 +59,7 @@ public class MainAnimation extends JPanel {
     private void findNearBalls(LineManager lineManager, List<Ball> list, Mode mode) {
         for (int i = 0; i < list.size() - 2; i++) {
             int j = i + 1;
-            while ((getCoordOf(list.get(j), mode) - getCoordOf(list.get(i), mode)) < 200) {
+            while ((getCoordOf(list.get(j), mode) - getCoordOf(list.get(i), mode)) < 150) {
                 lineManager.suggestLine(new Line(list.get(i).getLoc(), list.get(j).getLoc()));
                 j++;
                 if (j > list.size() - 1) break;
