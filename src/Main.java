@@ -7,12 +7,12 @@ public class Main {
     public static void main(String[] args) {
         MainAnimation animation = new MainAnimation();
         for (int i = 0; i < 40; i++) {
-            animation.addBall(5,  randInt(0, 1200), randInt(0, 600), (-2 * randInt(0, 2) + 1) * 2, (-2 * randInt(0, 2) + 1) * 2);
+            animation.addBall(5,  randInt(0, 1200), randInt(0, 600), randOpt(new int[] {-1, 1}), randOpt(new int[] {-1, 1}));
         }
         while (true) {
             animation.step();
             try {
-                Thread.sleep(20);
+                Thread.sleep(10);
             } catch (Exception e) {
                 System.err.println("Something went wrong with the sleep command.");
                 e.printStackTrace();
@@ -24,5 +24,9 @@ public class Main {
 
     public static int randInt(int start, int end) {
         return rand.nextInt(end - start) + start;
+    }
+
+    public static int randOpt(int[] options) {
+        return options[randInt(0, options.length)];
     }
 }
