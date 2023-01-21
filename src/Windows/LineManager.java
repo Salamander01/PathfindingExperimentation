@@ -15,8 +15,8 @@ public class LineManager {
     }
 
     public void suggestLine(Line line) {
-        if (!set.add(line) || !set.add(line.opposite())) {
-            if (drawn.add(line) || drawn.add(line.opposite())) draw(line);
+        if (!set.add(line)) {
+            if (drawn.add(line)) draw(line);
         }
     }
 

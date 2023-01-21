@@ -13,7 +13,8 @@ public record Line(Location loc1, Location loc2) {
         return (loc1 == line.loc1 && loc2 == line.loc2) || (loc1 == line.loc2 && loc2 == line.loc1);
     }
 
-    public Line opposite() {
-        return new Line(this.loc2, this.loc1);
+    // Guarantees that a line from A to B is the same as B to A
+    public static Line newLine(Location loc1, Location loc2) {
+        return new Line((loc1.x() > loc2.x() ? loc1 : loc2), (loc1.x() < loc2.x() ? loc1 : loc2));
     }
 }

@@ -20,6 +20,8 @@ public class MainAnimation extends JPanel {
     public MainAnimation() {
         this.balls = new ArrayList<>();
 
+        setBackground(Color.BLACK);
+
         JFrame.setDefaultLookAndFeelDecorated(true);
         JFrame frame = new JFrame("Main Animation");
 
@@ -45,33 +47,31 @@ public class MainAnimation extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (Ball ball : balls) {
-//            g.setColor(Color.red);
-//            g.fillOval((int)(ball.getX() - 100), (int)(ball.getY() - 100), 200, 200);
-//            g.setColor(Color.black);
+            // xSorted and ySorted are broken optimization stuff
 //            xSorted = (ArrayList<Ball>) sort(xSorted, Mode.X);
             LineManager manager = new LineManager(g);
-            findNearBalls(manager, sort(balls, Mode.X), Mode.X);
+            findNearBalls(manager, sort(balls, Axis.X), Axis.X);
 //            ySorted = (ArrayList<Ball>) sort(ySorted, Mode.Y);
-            findNearBalls(manager, sort(balls, Mode.Y), Mode.Y);
+            findNearBalls(manager, sort(balls, Axis.Y), Axis.Y);
 
-            g.setColor(Color.BLACK);
+            g.setColor(Color.WHITE);
             g.fillOval((int)(ball.getX() - ball.getRadius()), (int)(ball.getY() - ball.getRadius()), (int) ball.getDiameter(), (int) ball.getDiameter());
         }
     }
 
-    private void findNearBalls(LineManager lineManager, List<Ball> list, Mode mode) {
+    private void findNearBalls(LineManager lineManager, List<Ball> list, Axis axis) {
         for (int i = 0; i < list.size() - 2; i++) {
             int j = i + 1;
-            while ((getCoordOf(list.get(j), mode) - getCoordOf(list.get(i), mode)) < CLOSE_LINE_TOLERANCE) {
-                lineManager.suggestLine(new Line(list.get(i).getLoc(), list.get(j).getLoc()));
+            while ((getCoordOf(list.get(j), axis) - getCoordOf(list.get(i), axis)) < CLOSE_LINE_TOLERANCE) {
+                lineManager.suggestLine(Line.newLine(list.get(i).getLoc(), list.get(j).getLoc()));
                 j++;
                 if (j > list.size() - 1) break;
             }
         }
     }
 
-    private double getCoordOf(Ball ball, Mode mode) {
-        return switch (mode) {
+    private double getCoordOf(Ball ball, Axis axis) {
+        return switch (axis) {
             case X -> ball.getX();
             case Y -> ball.getY();
         };
@@ -80,11 +80,10 @@ public class MainAnimation extends JPanel {
     public void addBall(float radius, float startX, float startY, float dx, float dy) {
         this.balls.add(new Ball(radius, new Location(startX, startY), dx, dy));
     }
+    public enum Axis { X, Y }
 
-    public enum Mode { X, Y }
-
-    List<Ball> sort(List<Ball> array, Mode mode) {
-        Function<Ball, Double> getCoord = b -> getCoordOf(b, mode);
+    List<Ball> sort(List<Ball> array, Axis axis) {
+        Function<Ball, Double> getCoord = b -> getCoordOf(b, axis);
         return array.stream().sorted(Comparator.comparing(getCoord)).toList();
     }
 }
