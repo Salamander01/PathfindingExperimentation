@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Main {
 
-    public static final boolean DARK_MODE = false;
+    public static final boolean DARK_MODE = true;
     public static final int NUM_OF_BALLS = 40;
 
     public static void main(String[] args) {
