@@ -13,14 +13,16 @@ public class MainAnimation extends JPanel {
 
     public static final int CLOSE_LINE_TOLERANCE = 150;
 
-    private ArrayList<Ball> balls;
+    public final boolean DARK_MODE;
 
-    private int width, height;
+    private final ArrayList<Ball> balls;
 
-    public MainAnimation() {
+    public MainAnimation(boolean darkMode) {
         this.balls = new ArrayList<>();
 
-        setBackground(Color.BLACK);
+        this.DARK_MODE = darkMode;
+
+        setBackground(this.DARK_MODE ? Color.BLACK : Color.WHITE);
 
         JFrame.setDefaultLookAndFeelDecorated(true);
         JFrame frame = new JFrame("Main Animation");
@@ -34,8 +36,8 @@ public class MainAnimation extends JPanel {
     }
 
     public void step() {
-        this.width = getWidth();
-        this.height = getHeight();
+        int width = getWidth();
+        int height = getHeight();
 
         for (Ball ball : balls) {
             ball.step(width, height);
@@ -54,7 +56,7 @@ public class MainAnimation extends JPanel {
 //            ySorted = (ArrayList<Ball>) sort(ySorted, Mode.Y);
             findNearBalls(manager, sort(balls, Axis.Y), Axis.Y);
 
-            g.setColor(Color.WHITE);
+            g.setColor(this.DARK_MODE ? Color.WHITE : Color.BLACK);
             g.fillOval((int)(ball.getX() - ball.getRadius()), (int)(ball.getY() - ball.getRadius()), (int) ball.getDiameter(), (int) ball.getDiameter());
         }
     }
