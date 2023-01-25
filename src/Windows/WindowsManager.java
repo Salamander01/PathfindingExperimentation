@@ -16,7 +16,7 @@ public class WindowsManager {
         windows.add(new OptionsWindow());
     }
 
-    public static void updateWindows() {
+    public static void updateAll() {
         windows.forEach(Window::update);
     }
 }
