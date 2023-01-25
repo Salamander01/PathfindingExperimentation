@@ -10,7 +10,7 @@ class OptionsWindow extends Window {
         JButton darkModeToggle = new JButton(WindowsManager.darkMode ? "Light Mode" : "Dark Mode");
         darkModeToggle.addActionListener(e -> {
             WindowsManager.darkMode = !WindowsManager.darkMode;
-            darkModeToggle.setName(WindowsManager.darkMode ? "Light Mode" : "Dark Mode");
+            darkModeToggle.setText(WindowsManager.darkMode ? "Light Mode" : "Dark Mode");
             WindowsManager.updateWindows();
         });
         this.add(darkModeToggle);
