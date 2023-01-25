@@ -34,7 +34,7 @@ class BallWindow extends Window {
 //
 //            }
 //        };
-        this.addMouseListener(mouseListener);
+//        this.addMouseListener(mouseListener);
         this.frame.setVisible(true);
     }
 
