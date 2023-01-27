@@ -35,9 +35,11 @@ class Window extends JPanel {
     }
 
     // Protected Methods
-    protected void update() {
+    protected void systemUpdate() {
+    }
+
+    protected void userUpdate() {
         setBackground(WindowsManager.darkMode ? Color.BLACK : Color.WHITE);
-        repaint();
     }
 
 }

@@ -1,22 +1,27 @@
 package Windows;
 
-import java.util.ArrayList;
+import Graph.Location;
 
 public class WindowsManager {
     protected static boolean darkMode = true;
 
-    private static ArrayList<Window> windows;
+    private static BallWindow ballWindow;
+    private static OptionsWindow optionsWindow;
 
-    static {
-        windows = new ArrayList<>();
+    public enum windowType {
+        BALL_WINDOW,
+        OPTIONS_WINDOW
     }
 
     public static void initWindows() {
-        windows.add(new BallWindow());
-        windows.add(new OptionsWindow());
+        ballWindow = new BallWindow();
+        optionsWindow = new OptionsWindow();
+
+        ballWindow.addBall(new Location(5, 5), 2, 2);
     }
 
     public static void updateAll() {
-        windows.forEach(Window::update);
+        ballWindow.userUpdate();
+        optionsWindow.userUpdate();
     }
 }
