@@ -17,7 +17,8 @@ class BallWindow extends Window {
 
         Thread thread = new Thread(() -> {
             while (true) {
-                this.systemUpdate();
+                balls.forEach(e -> e.update(this.getWidth(), this.getHeight()));
+                this.repaint();
                 try {
                     Thread.sleep(5);
                 } catch (InterruptedException e) {
@@ -44,10 +45,4 @@ class BallWindow extends Window {
         });
     }
 
-    @Override
-    protected void systemUpdate() {
-        super.systemUpdate();
-        this.balls.forEach(e -> e.update(this.getWidth(), this.getHeight()));
-        repaint();
-    }
 }
