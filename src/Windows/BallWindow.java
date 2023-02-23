@@ -5,6 +5,9 @@ import Windows.Elements.Ball;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 class BallWindow extends Window {
 
@@ -15,19 +18,11 @@ class BallWindow extends Window {
 
         this.balls = new ArrayList<>();
 
-        Thread thread = new Thread(() -> {
-            while (true) {
-                balls.forEach(e -> e.update(this.getWidth(), this.getHeight()));
-                this.repaint();
-                try {
-                    Thread.sleep(5);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-
-        thread.start();
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.scheduleAtFixedRate(() -> {
+            balls.forEach(e -> e.update(this.getWidth(), this.getHeight()));
+            this.repaint();
+        }, 10, 15, TimeUnit.MILLISECONDS);
 
         this.frame.setVisible(true);
     }
