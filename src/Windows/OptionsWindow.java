@@ -11,7 +11,7 @@ class OptionsWindow extends Window {
         darkModeToggle.addActionListener(e -> {
             WindowsManager.darkMode = !WindowsManager.darkMode;
             darkModeToggle.setText(WindowsManager.darkMode ? "Light Mode" : "Dark Mode");
-            WindowsManager.updateAll();
+            WindowsManager.userUpdateAll();
         });
         this.add(darkModeToggle);
         this.frame.setVisible(true);

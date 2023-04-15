@@ -26,7 +26,7 @@ public class WindowsManager {
         ballWindow.addBall(new Location(5, 5), 2, 2);
     }
 
-    public static void updateAll() {
+    public static void userUpdateAll() {
         ballWindow.update();
         optionsWindow.update();
     }
